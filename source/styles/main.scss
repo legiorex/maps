@@ -1,0 +1,104 @@
+body{
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  font-family: Trebuchet MS;
+  color: #4f4f4f;
+}
+
+
+.container{
+  background: #999999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  align-content: center;
+  overflow: auto;
+}
+
+.content {
+  width: 1300px;
+  height: 700px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+}
+.logo__title {
+  font-size: 20px;
+}
+.balloon{
+  padding: 13px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 270px;
+  height: 420px;
+  z-index: 1000;
+  background-color: #fff;
+  border-radius: 17px;
+}
+.top{
+  display: flex;
+  flex-direction: column;
+
+  &__header{
+  margin: -13px;
+  height: 35px;
+  background-color: #ff8663;
+  color: #ffffff;
+  }
+
+  &__comments{
+    height: 110px;
+    color: #4f4f4f;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 15px;
+  }
+}
+.bottom{
+  display: flex;
+  flex-direction: column;
+
+  &__title{
+    color: #ff8663;
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  &__form{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  &__button-add{
+    height: 30px;
+    width: 87px;
+    background: #ff8663;
+    color: #fff;
+    border-radius: 30px;
+    align-self: end;
+  }
+}
+.name-user,.place{
+  height: 32px;
+  border-style: none;
+  border: 1px solid #c4c4c4;
+  border-radius: 30px;
+  margin-bottom: 15px;
+  padding-left: 20px;
+}
+
+.review{
+  width: 100%;
+  height: 100px;
+  resize: none;
+  box-sizing: border-box;
+}
+.hide{
+  display: none;
+}
