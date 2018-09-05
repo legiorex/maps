@@ -6,6 +6,9 @@ const userName = document.querySelector('.name-user').value;
 const place = document.querySelector('.place').value;
 const review = document.querySelector('.review').value;
 
+
+let dataReview
+
 let listPoint = [[43.119784, 131.893635], [43.119726, 131.893611], [43.119708, 131.893674]];
 
 // center: [43.119796, 131.893628],
@@ -35,20 +38,21 @@ function init() {
         clusterDisableClickZoom: true
     });
 
-    for(let point of listPoint){
+
+
+
+    // Слушаем клик на карте.
+    myMap.events.add('click', function (e) {
+        const coords = e.get('coords');
         myMap.geoObjects
-            .add(new ymaps.Placemark(point, {
-                balloonContent: 'Это новая точка'
+            .add(new ymaps.Placemark(coords, {
+                balloonContentHeader: 'Это новая точка'
             }, {
                 preset: 'islands#icon',
                 iconColor: '#0095b6'
             }))
 
-    }
 
-    // Слушаем клик на карте.
-    myMap.events.add('click', function (e) {
-        const coords = e.get('coords');
 
         getAddress(coords);
         clikMap();
@@ -104,7 +108,6 @@ function clikMap() {
                 balloonPopUp.style.top = e.pageY + 'px';
 
 
-
                 balloonPopUp.addEventListener('click', (e) => {
                     console.log('second click');
                 });
@@ -116,13 +119,7 @@ function clikMap() {
 }
 function dataForm(myMap, coords) {
     buttonSave.addEventListener('click', () => {
-        myMap.geoObjects
-            .add(new ymaps.Placemark(coords, {
-                balloonContent: 'Это новая точка'
-            }, {
-                preset: 'islands#icon',
-                iconColor: '#0095b6'
-            }))
+
 
         console.log('test');
     })
