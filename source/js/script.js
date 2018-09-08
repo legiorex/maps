@@ -50,13 +50,33 @@ function init() {
     });
     // Подписываемся на событие клика по объекту.
     objectManager.objects.events.add(['click'], function (e) {
+        var objectId = e.get('objectId'),
+            objectGeometry = objectManager.objects.getById(objectId).geometry.type;
+
+        console.log(objectGeometry);
         // objectId – идентификатор объекта, на котором произошло событие.
-        let objectId = e.get('objectId'),
-            object = objectManager.objects.getById(objectId);
+        // let objectId = e.get('objectId'),
+        //     object = objectManager.objects.getById(objectId);
         // Выведем информацию об объекте.
-        console.log('Тип объекта: ' + object.geometry.type);
-        console.log('Координаты объекта: ' + object.geometry.coordinates);
+        console.log('Тип объекта: ' + object.properties.geoObjects.length);
+        // console.log('Координаты объекта: ' + object.geometry.coordinates);
     });
+
+//     function onClusterEvent (e) {
+//         var objectId = e.get('objectId');
+//         if (e.get('type') === 'mouseenter') {
+//             objectManager.clusters.setObjectOptions(objectId, {
+//                 preset: 'islands#yellowIcon'
+//             });
+//         } else {
+//             objectManager.clusters.setObjectOptions(objectId, {
+//                 preset: 'islands#blueIcon'
+//             });
+//         }
+//     }
+//
+// // Назначаем обработчик событий для коллекции объектов-кластеров менеджера.
+//     objectManager.clusters.events.add(['mouseenter', 'mouseleave'], onClusterEvent);
 
     // console.log(objectManager.events);
     // objectManager.addEventListener('click', () => {
@@ -66,6 +86,8 @@ function init() {
     // Слушаем клик на карте.
     myMap.events.add('click', function (e) {
         coords = e.get('coords');
+
+
 
         getAddress(coords);
         clickMap();
@@ -84,6 +106,7 @@ function init() {
 
     function isClickForm(e) {
 
+
         if(balloonPopUp.classList.contains('hide')){
             return false;
         }
@@ -92,6 +115,7 @@ function init() {
         let top = parseInt((balloonPopUp.style.top), 10);
         let finishX = left + balloonPopUp.offsetWidth;
         let finishY = top + balloonPopUp.offsetHeight;
+
 
 
         if(left <= e.pageX && e.pageX <= finishX && e.pageY >= top && e.pageY <= finishY)
@@ -104,8 +128,8 @@ function init() {
 
     function clickMap() {
         mapBlock.addEventListener('click', (e) => {
-
-            if(!isClickForm(e)){
+            console.log(e.target);
+            if(!isClickForm(e) /*&& e.target.className.indexOf('pane') === -1*/ ){
                 balloonPopUp.classList.remove('hide');
                 balloonPopUp.style.left = e.pageX + 'px';
                 balloonPopUp.style.top = e.pageY + 'px';
@@ -117,9 +141,9 @@ function init() {
         })
 
     }
-    
 
-    
+
+
     let curentId = 0;
     buttonSave.addEventListener('click', () => {
 
@@ -147,7 +171,7 @@ function init() {
         myMap.geoObjects.add(objectManager);
         objectManager.add(storage.data);
 
-        console.log(objectManager.objects.click);
+        // console.log(objectManager.objects.click);
 
         userName.value = '';
         place.value = '';
